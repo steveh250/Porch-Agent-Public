@@ -1,0 +1,20 @@
+# One arrival with noise. Home is config.example.yaml's 51.501, -0.142.
+# Run: porch-light simulate sim/arrival.jsonl --fake-light --at 2026-11-20T18:30
+# Walking home from 1.2 km north.
+{"_type": "location", "lat": 51.511792, "lon": -0.142, "acc": 15, "tst": 1790000000, "tid": "ph"}
+{"_type": "location", "lat": 51.509094, "lon": -0.142, "acc": 15, "tst": 1790000060, "tid": "ph"}
+{"_type": "location", "lat": 51.506396, "lon": -0.142, "acc": 15, "tst": 1790000120, "tid": "ph"}
+# Poor fix (acc 250 m) that lands inside the radius: must be discarded.
+{"_type": "location", "lat": 51.502349, "lon": -0.142, "acc": 250, "tst": 1790000150, "tid": "ph"}
+# An OwnTracks transition message: not a location, ignored.
+{"_type": "transition", "event": "enter", "desc": "Home", "tst": 1790000160}
+{"_type": "location", "lat": 51.505047, "lon": -0.142, "acc": 15, "tst": 1790000180, "tid": "ph"}
+# Crosses the 400 m outer radius: ARRIVAL fires here, once.
+{"_type": "location", "lat": 51.504148, "lon": -0.142, "acc": 15, "tst": 1790000210, "tid": "ph"}
+{"_type": "location", "lat": 51.503248, "lon": -0.142, "acc": 15, "tst": 1790000240, "tid": "ph"}
+# Crosses the 200 m inner radius: NEAR, no second fire.
+{"_type": "location", "lat": 51.502349, "lon": -0.142, "acc": 15, "tst": 1790000270, "tid": "ph"}
+# GPS wobble back out to 300 m (inside outer): no re-arm, no fire.
+{"_type": "location", "lat": 51.503698, "lon": -0.142, "acc": 15, "tst": 1790000300, "tid": "ph"}
+{"_type": "location", "lat": 51.50136, "lon": -0.142, "acc": 15, "tst": 1790000330, "tid": "ph"}
+{"_type": "location", "lat": 51.501045, "lon": -0.142, "acc": 15, "tst": 1790000360, "tid": "ph"}

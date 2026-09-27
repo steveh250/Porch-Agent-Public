@@ -1,0 +1,28 @@
+[project]
+name = "porch-agent"
+version = "0.1.0"
+description = "MCP server exposing a single WiZ smart bulb over streamable-HTTP"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+dependencies = [
+    # UDP protocol layer for WiZ devices. Requires Python >=3.11.
+    "pywizlight>=0.6.6",
+    # MCP 2.x. Brings uvicorn and starlette as hard dependencies, so
+    # streamable-HTTP needs nothing extra.
+    "mcp>=2",
+    # Declared explicitly: python-dotenv is only an extra of mcp ("cli"),
+    # not a hard dependency, so relying on mcp to supply it would break.
+    "python-dotenv>=1.0",
+]
+
+[project.scripts]
+porch-agent = "porch_agent.server:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["porch_agent"]

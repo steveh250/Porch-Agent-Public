@@ -1,0 +1,15 @@
+# Two separate arrivals: the state machine re-arms only beyond the outer radius.
+# Run: porch-light simulate sim/leave-and-return.jsonl --fake-light --force-fallback --at 2026-11-20T23:30
+# Start at home: the first fix never fires.
+{"_type": "location", "lat": 51.50109, "lon": -0.142, "acc": 15, "tst": 1790000000, "tid": "ph"}
+# Leave: beyond 400 m re-arms.
+{"_type": "location", "lat": 51.507295, "lon": -0.142, "acc": 15, "tst": 1790000600, "tid": "ph"}
+{"_type": "location", "lat": 51.518986, "lon": -0.142, "acc": 15, "tst": 1790001200, "tid": "ph"}
+# Come back: fires.
+{"_type": "location", "lat": 51.504417, "lon": -0.142, "acc": 15, "tst": 1790003600, "tid": "ph"}
+{"_type": "location", "lat": 51.501899, "lon": -0.142, "acc": 15, "tst": 1790003660, "tid": "ph"}
+# Pop out to the shop at 500 m: re-arms.
+{"_type": "location", "lat": 51.505497, "lon": -0.142, "acc": 15, "tst": 1790005000, "tid": "ph"}
+# Return: fires again.
+{"_type": "location", "lat": 51.503698, "lon": -0.142, "acc": 15, "tst": 1790005400, "tid": "ph"}
+{"_type": "location", "lat": 51.50118, "lon": -0.142, "acc": 15, "tst": 1790005460, "tid": "ph"}

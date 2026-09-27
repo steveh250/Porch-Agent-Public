@@ -1,0 +1,61 @@
+# Copy to config.yaml and edit. Secrets go in .env, not here.
+# Relative paths are resolved against the directory this file is in.
+
+home:
+  lat: 51.50100          # your front door, decimal degrees
+  lon: -0.14200
+  timezone: Europe/London  # IANA name; used for "after 11pm" and twilight times
+
+presence:
+  outer_radius_m: 400    # AWAY -> APPROACHING below this: the agent fires once
+  inner_radius_m: 200    # APPROACHING -> NEAR below this
+  max_accuracy_m: 100    # discard OwnTracks fixes less accurate than this
+  max_fix_age_s: 120     # older fixes (queued while the phone was offline) never fire; 0 = off
+
+mqtt:
+  host: localhost
+  port: 1883
+  topic: owntracks/+/+   # or owntracks/<user>/<device> for one phone
+  client_id: porch-light
+  username: porch        # Mosquitto user (HOWTO Step 4); password comes from MQTT_PASSWORD in .env
+
+llm:
+  model: google/gemini-2.5-flash   # any OpenRouter model id with tool calling
+  base_url: https://openrouter.ai/api/v1
+  timeout_s: 30          # hard limit for the whole agent run
+
+mcp:
+  url: http://127.0.0.1:8000/mcp   # the porch-agent server in the repo root
+  timeout_s: 10          # per deterministic call (fallback and verification)
+
+bulb:
+  # Used only until the server reports the bulb's own range; the narrower of
+  # the two wins, so you can restrict the range but not widen it.
+  kelvin_min: 2200
+  kelvin_max: 6500
+  min_brightness_pct: 10
+  max_brightness_pct: 100
+
+fallback:
+  # Used when the agent fails, times out, or weather is unavailable.
+  brightness_pct: 80
+  color_temp_kelvin: 2700
+  sun_elevation_deg: -6  # civil dusk: below this the fallback switches the light on
+
+resting:
+  # What the light does when nobody is arriving. From civil dusk to civil dawn it
+  # rests at this low setting; in daylight it is off. An arrival lets the agent
+  # choose; revert_after_min later it goes back to resting.
+  enabled: true
+  brightness_pct: 20
+  color_temp_kelvin: 2700
+  revert_after_min: 10
+  sun_elevation_deg: -6  # civil dusk/dawn
+
+weather:
+  cache_ttl_s: 600
+  cache_file: state/weather_cache.json
+
+paths:
+  policy: policy.md
+  event_log: logs/arrivals.jsonl
