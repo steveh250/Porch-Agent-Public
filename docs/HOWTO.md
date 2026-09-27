@@ -372,8 +372,8 @@ the Windows drive: virtualenvs there are slow and run into permission problems.
 
 ```bash
 cd ~
-git clone https://github.com/steveh250/Porch-Agent.git
-cd Porch-Agent
+git clone https://github.com/steveh250/Porch-Agent-Public.git
+cd Porch-Agent-Public
 git switch main      # if you cloned earlier, also run: git pull
 python3 -m venv .venv
 .venv/bin/pip install -e .

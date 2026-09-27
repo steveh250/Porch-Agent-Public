@@ -75,8 +75,8 @@ python harness.py                 # in another terminal: check it against the re
 ## Install
 
 ```bash
-git clone https://github.com/steveh250/Porch-Agent.git
-cd Porch-Agent
+git clone https://github.com/steveh250/Porch-Agent-Public.git
+cd Porch-Agent-Public
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -e .
